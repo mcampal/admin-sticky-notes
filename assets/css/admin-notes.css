@@ -1,0 +1,230 @@
+/* ==========================================================================
+   WP Admin Sticky Notes — admin stylesheet
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Floating "Add Note" button
+   -------------------------------------------------------------------------- */
+.wasn-add-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99990;
+  padding: 10px 16px;
+  background: #2271b1;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: background 0.15s, transform 0.1s;
+}
+.wasn-add-btn:hover {
+  background: #135e96;
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   Placement mode — highlight hovered elements
+   -------------------------------------------------------------------------- */
+.wasn-placement-mode * {
+  cursor: crosshair !important;
+}
+.wasn-placement-mode *:hover {
+  outline: 2px dashed #2271b1 !important;
+  outline-offset: 2px !important;
+}
+/* Exclude our own UI from the highlight */
+.wasn-placement-mode .wasn-add-btn:hover,
+.wasn-placement-mode #wasn-modal-overlay:hover,
+.wasn-placement-mode .wasn-note:hover {
+  outline: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Sticky note cards
+   JS always sets `position` explicitly (absolute or fixed depending on mode),
+   so no position property is declared here.
+   -------------------------------------------------------------------------- */
+.wasn-note {
+  z-index: 99980;
+  min-width: 180px;
+  max-width: 260px;
+  padding: 10px 12px 8px;
+  border-radius: 4px;
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.2);
+  font-size: 12px;
+  line-height: 1.5;
+  cursor: default;
+  word-break: break-word;
+  border-top: 4px solid rgba(0, 0, 0, 0.12);
+  user-select: none;
+}
+
+/* Note card colors */
+.wasn-color-yellow { background: #fff9c4; border-top-color: #f9a825; }
+.wasn-color-red    { background: #ffebee; border-top-color: #e53935; }
+.wasn-color-green  { background: #e8f5e9; border-top-color: #388e3c; }
+.wasn-color-blue   { background: #e3f2fd; border-top-color: #1976d2; }
+
+/* Content */
+.wasn-note-content {
+  margin-top: 4px;
+  color: #212121;
+  white-space: pre-wrap;
+  cursor: grab;
+}
+.wasn-note-content:active {
+  cursor: grabbing;
+}
+
+/* Meta line */
+.wasn-note-meta {
+  margin-top: 6px;
+  font-size: 10px;
+  color: #757575;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 4px;
+}
+
+/* Action buttons row */
+.wasn-note-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+.wasn-note-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  opacity: 0.55;
+  transition: opacity 0.1s, background 0.1s;
+}
+.wasn-note-actions button:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   Management page — color badges in the notes table
+   Scoped to .wasn-color-badge so they don't override the note card colors above.
+   -------------------------------------------------------------------------- */
+.wasn-color-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+.wasn-color-badge.wasn-color-yellow { background: #fff176; }
+.wasn-color-badge.wasn-color-red    { background: #ef9a9a; }
+.wasn-color-badge.wasn-color-green  { background: #a5d6a7; }
+.wasn-color-badge.wasn-color-blue   { background: #90caf9; }
+
+/* --------------------------------------------------------------------------
+   Modal / overlay
+   -------------------------------------------------------------------------- */
+.wasn-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99995;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wasn-modal {
+  background: #fff;
+  border-radius: 6px;
+  padding: 24px;
+  width: 360px;
+  max-width: 90vw;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22);
+}
+
+.wasn-modal h3 {
+  margin: 0 0 14px;
+  font-size: 16px;
+  color: #1d2327;
+}
+
+.wasn-modal-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  border: 1px solid #8c8f94;
+  border-radius: 4px;
+  resize: vertical;
+  font-family: inherit;
+}
+.wasn-modal-textarea:focus {
+  border-color: #2271b1;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(34, 113, 177, 0.25);
+}
+
+/* Color picker row */
+.wasn-color-row {
+  display: flex;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.wasn-color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.1s, border-color 0.1s;
+}
+.wasn-color-swatch:hover  { transform: scale(1.15); }
+.wasn-color-swatch.active { border-color: #1d2327; transform: scale(1.15); }
+
+.wasn-color-swatch.wasn-color-yellow { background: #fff9c4; }
+.wasn-color-swatch.wasn-color-red    { background: #ffebee; }
+.wasn-color-swatch.wasn-color-green  { background: #e8f5e9; }
+.wasn-color-swatch.wasn-color-blue   { background: #e3f2fd; }
+
+/* Modal button row */
+.wasn-modal-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   Toast notifications
+   -------------------------------------------------------------------------- */
+.wasn-toast {
+  position: fixed;
+  bottom: 72px;
+  right: 24px;
+  z-index: 99999;
+  padding: 10px 18px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  animation: wasn-fadein 0.2s ease;
+}
+.wasn-toast-info  { background: #2271b1; }
+.wasn-toast-error { background: #d63638; }
+
+@keyframes wasn-fadein {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
