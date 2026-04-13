@@ -7,7 +7,7 @@
    -------------------------------------------------------------------------- */
 .wasn-add-btn {
   position: fixed;
-  bottom: 24px;
+  bottom: 40px;
   right: 24px;
   z-index: 99990;
   padding: 10px 16px;
@@ -210,7 +210,7 @@
    -------------------------------------------------------------------------- */
 .wasn-toast {
   position: fixed;
-  bottom: 72px;
+  bottom: 88px;
   right: 24px;
   z-index: 99999;
   padding: 10px 18px;
